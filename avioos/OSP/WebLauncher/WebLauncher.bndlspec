@@ -1,0 +1,23 @@
+<bundlespec>
+	<manifest>
+		<name>Avioos OSP Web Launcher</name>
+		<symbolicName>net.avioos.osp.weblauncher</symbolicName>
+		<version>0.0.8</version>
+		<vendor>Avioos</vendor>
+		<copyright>(c) 2018, Avioos LLC</copyright>
+		<activator>
+			<class>Avioos::BundleActivator</class>
+			<library>net.avioos.osp.weblauncher</library>
+		</activator>
+		<dependency>
+      		<symbolicName>net.avioos.osp.web</symbolicName>
+      		<version>[0.0.1, 1.0.0)</version>
+    	</dependency>
+	</manifest>
+	<code>
+	    ${bin}/*.dll,
+    	${bin}/*.pdb,
+		bin/${osName}/${osArch}/*.so,
+		bin/${osName}/${osArch}/*.dylib
+	</code>
+</bundlespec>

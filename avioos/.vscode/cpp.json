@@ -1,0 +1,65 @@
+{
+    "Avioos OSP Service": {
+        "prefix": "avioos.osp.service",
+        "body": [
+            "#ifndef Avioos_OSP_${TM_DIRECTORY/^.+\\/(.*)$/$1/}_${TM_FILENAME_BASE}_INCLUDED",
+            "#define Avioos_OSP_Web_${TM_FILENAME_BASE}_INCLUDED",
+            "#include \"Avioos/OSP/${TM_DIRECTORY/^.+\\/(.*)$/$1/}/${TM_DIRECTORY/^.+\\/(.*)$/$1/}.h\"",
+            "#include \"Poco/OSP/Service.h\"",
+            "#include \"Poco/AutoPtr.h\"",
+            "namespace Avioos {",
+            "namespace OSP {",
+            "namespace ${TM_DIRECTORY/^.+\\/(.*)$/$1/} {",
+            "\tclass AvioosOSPWeb_API ${TM_FILENAME_BASE}: public Poco::OSP::Service {",
+            "\t\ttypedef Poco::AutoPtr < ${TM_FILENAME_BASE} > Ptr;",
+            "\t\tvirtual const std::type_info & type() const;",
+            "\t\tvirtual bool isA(const std::type_info & otherType) const;",
+            "\t};",
+            "} //namespace ${TM_DIRECTORY/^.+\\/(.*)$/$1/}",
+            "} // namespace OSP",
+            "} // namespace Avioos",
+            "#endif"
+        ]
+    },
+    "Avioos OSP Service Implementation": {
+        "prefix": "avioos.osp.service.imp",
+        "body": [
+            "#include \"Avioos/OSP/${1}/${TM_FILENAME_BASE}.h\"",
+            "namespace Avioos {",
+            "namespace OSP {",
+            "namespace ${1} {",
+            "const std::type_info &${TM_FILENAME_BASE}::type() const",
+            "{",
+            "\treturn typeid(${TM_FILENAME_BASE});",
+            "}",
+            "bool ${TM_FILENAME_BASE}::isA(const std::type_info &otherType) const",
+            "{",
+            "\tstd::string name(typeid(${TM_FILENAME_BASE}).name());",
+            "\treturn name == otherType.name() || Poco::OSP::Service::isA(otherType);",
+            "}",
+            "} // ${1}",
+            "} // OSP",
+            "} // Avioos"
+        ]
+    },
+    "Avioos BundleActivator Implementation": {
+        "prefix": "avioos.bundleactivator.imp",
+        "body": [
+            "#include \"Poco/OSP/BundleActivator.h\"",
+            "#include \"Poco/OSP/BundleContext.h\"",
+            "#include \"Poco/ClassLibrary.h\"",
+            "namespace Avioos {",
+            "class BundleActivator : public Poco::OSP::BundleActivator {",
+            "\tpublic:",
+            "\t\tvoid start(Poco::OSP::BundleContext::Ptr pContext){",
+            "\t\t}",
+            "\t\tvoid stop(Poco::OSP::BundleContext::Ptr pContext){",
+            "\t\t}",
+            "};",
+            "}",
+            "POCO_BEGIN_MANIFEST(Poco::OSP::BundleActivator)",
+            "POCO_EXPORT_CLASS(Avioos::BundleActivator)",
+            "POCO_END_MANIFEST"
+        ]
+    }
+}

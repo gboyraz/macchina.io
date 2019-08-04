@@ -1,0 +1,15 @@
+#
+# Makefile-Library
+#
+# Makefile for Avioos OSP Web Library
+#
+
+include $(POCO_BASE)/build/rules/global
+
+objects = WebServerDomainDispatcher
+
+target         = AvioosOSPWeb
+target_version = 1
+target_libs    = PocoOSP PocoNet PocoUtil PocoXML PocoFoundation
+
+include $(POCO_BASE)/build/rules/lib
